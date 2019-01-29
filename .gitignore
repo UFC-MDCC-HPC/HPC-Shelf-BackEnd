@@ -17,6 +17,10 @@ RemoteSystemsTempFiles
 Debug
 bin
 obj
-local_files
+
+prototype/ec2/.vs/
+prototype/ec2/packages/
+
 .metadata
+
 
