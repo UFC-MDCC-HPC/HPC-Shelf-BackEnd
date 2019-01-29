@@ -18,8 +18,8 @@ Debug
 bin
 obj
 
-prototype/ec2/.vs/
-prototype/ec2/packages/
+.vs
+packages
 
 .metadata
 
