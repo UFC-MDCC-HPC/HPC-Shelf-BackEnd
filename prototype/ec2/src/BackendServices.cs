@@ -58,17 +58,22 @@ namespace AWS.Shelf {
                     }
                 }
             };
-            List<Reservation> result = client.DescribeInstances(req).Reservations;
+            IVirtualMachine vm = null;
+            while (vm == null || vm.PublicIpAddress == null) {
+                List<Reservation> result = client.DescribeInstances(req).Reservations;
 
-            foreach (Amazon.EC2.Model.Reservation reservation in result) {
-                foreach (Instance runningInstance in reservation.Instances) {
-                    IVirtualMachine vm = new VirtualMachine();
-                    vm.InstanceId = runningInstance.InstanceId;
-                    vm.PrivateIpAddress = runningInstance.PrivateIpAddress;
-                    vm.PublicIpAddress = runningInstance.PublicIpAddress;
-                    VirtualMachines.Add(vm);
+                foreach (Amazon.EC2.Model.Reservation reservation in result) {
+                    foreach (Instance runningInstance in reservation.Instances) {
+                        vm = new VirtualMachine {
+                            InstanceId = runningInstance.InstanceId,
+                            PrivateIpAddress = runningInstance.PrivateIpAddress,
+                            PublicIpAddress = runningInstance.PublicIpAddress
+                        };
+                    }
                 }
+                if (vm == null || vm.PublicIpAddress == null) Thread.Sleep(1000); //Wait 1 min for aws release public IP address
             }
+            VirtualMachines.Add(vm);
         }
     }
     public class VirtualMachine: IVirtualMachine{
