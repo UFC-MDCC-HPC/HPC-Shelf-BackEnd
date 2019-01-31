@@ -49,8 +49,10 @@ namespace HPCBackendServices {
                 return VirtualMachines.ElementAt(0).PublicIpAddress;
             return "";
         }
+        [WebMethod]
+        public string current_folder() { return Utils.CURRENT_FOLDER;  }
 
-        protected void DataRegistry(AmazonEC2Client client, string instanceId) {
+            protected void DataRegistry(AmazonEC2Client client, string instanceId) {
             DescribeInstancesRequest req = new DescribeInstancesRequest() {
                 Filters = new List<Filter>() {
                     new Filter() {
