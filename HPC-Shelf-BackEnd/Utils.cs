@@ -5,7 +5,7 @@ namespace HPCBackendServices {
     public class Utils {
         public static string HOME = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/";
 
-        public static void commandExec(ProcessStartInfo processInfo) {
+        private static void commandExec(ProcessStartInfo processInfo) {
             processInfo.CreateNoWindow = true;
             processInfo.UseShellExecute = false;
             processInfo.RedirectStandardError = true;
