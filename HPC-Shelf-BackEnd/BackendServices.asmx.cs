@@ -24,8 +24,7 @@ namespace HPCBackendServices {
             string[] config = platform_config.Split('\n', '\t', '\r', ';',' ', ',');
 
             string keyPairName = "credential";
-            string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/";
-            InstancesManager.CreateKeyPair(client, keyPairName, home + keyPairName + ".pem");
+            InstancesManager.CreateKeyPair(client, keyPairName, Utils.HOME + keyPairName + ".pem");
 
             string securityGroupName = "hpc-shelf";
 
