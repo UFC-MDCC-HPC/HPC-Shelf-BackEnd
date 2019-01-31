@@ -1,0 +1,8 @@
+#!/bin/sh
+case $1 in '') echo "IP???" exit ;; *) 
+  echo "Starting known_hosts IP: $1"
+  rsh -i ~/credential.pem ubuntu@$1 "/home/ubuntu/cluster_config/run_known_hosts"
+;; esac
+
+
+

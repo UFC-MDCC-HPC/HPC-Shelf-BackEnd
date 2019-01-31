@@ -1,0 +1,9 @@
+#!/bin/sh
+./ip_hostname 3.93.201.217 master
+./ip_hostname 3.88.220.29 h1
+
+./known_hosts 3.93.201.217
+./known_hosts 3.88.220.29
+
+
+

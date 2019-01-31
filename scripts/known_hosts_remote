@@ -1,0 +1,9 @@
+#!/bin/sh
+case $1 in '') echo "IP??" exit ;; *) 
+  case $2 in '') echo "HOSTNAME??" exit ;; *) 
+    echo "known_hosts IP: $1 HOSTNAME: $2"	
+    rsh -i ~/credential.pem ubuntu@$1 "ssh-keyscan -H $2 >> ~/.ssh/known_hosts"
+  ;; esac
+;; esac
+
+

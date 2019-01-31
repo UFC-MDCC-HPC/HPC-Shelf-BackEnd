@@ -1,0 +1,13 @@
+#!/bin/sh
+case $1 in '') echo "IP???" exit ;; *) 
+  case $2 in '') echo "HOSTNAME???" exit ;; *) 
+    echo "Starting and setting IP: $1 HOSTNAME: $2"
+    ./id_rsa $1 $2
+    ./send_files $1
+    rsh -i ~/credential.pem ubuntu@$1 "/home/ubuntu/cluster_config/hostname_set $2"
+    #rsh -i ~/credential.pem ubuntu@$1 "/home/ubuntu/cluster_config/run_known_hosts"
+  ;; esac
+;; esac
+
+
+
