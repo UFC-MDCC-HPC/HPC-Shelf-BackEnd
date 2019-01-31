@@ -7,6 +7,7 @@ namespace HPCBackendServices {
     public class Utils {
         public static string HOME = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/";
         public static string CURRENT_FOLDER = Environment.CurrentDirectory;
+        public static string SCRIPTS = CURRENT_FOLDER + "/scripts/";
 
         public static void commandExecBash(string command) {
             Utils.commandExec(new ProcessStartInfo("bash", " " + command));

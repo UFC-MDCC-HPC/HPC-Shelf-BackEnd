@@ -79,6 +79,7 @@
     <Compile Include="IBackendServices.cs" />
     <Compile Include="InstancesManager.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="VirtualMachine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

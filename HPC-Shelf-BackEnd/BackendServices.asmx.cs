@@ -49,10 +49,8 @@ namespace HPCBackendServices {
                 return VirtualMachines.ElementAt(0).PublicIpAddress;
             return "";
         }
-        [WebMethod]
-        public string current_folder() { return Utils.CURRENT_FOLDER;  }
 
-            protected void DataRegistry(AmazonEC2Client client, string instanceId) {
+        protected void DataRegistry(AmazonEC2Client client, string instanceId) {
             DescribeInstancesRequest req = new DescribeInstancesRequest() {
                 Filters = new List<Filter>() {
                     new Filter() {
@@ -78,15 +76,5 @@ namespace HPCBackendServices {
             }
             VirtualMachines.Add(vm);
         }
-    }
-    public class VirtualMachine : IVirtualMachine {
-        private string instanceId;
-        public string InstanceId { get { return instanceId; } set { instanceId = value; } }
-
-        private string privateIpAddress;
-        public string PrivateIpAddress { get { return privateIpAddress; } set { privateIpAddress = value; } }
-
-        private string publicIpAddress;
-        public string PublicIpAddress { get { return publicIpAddress; } set { publicIpAddress = value; } }
     }
 }
