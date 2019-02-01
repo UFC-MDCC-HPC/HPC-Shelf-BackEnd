@@ -66,7 +66,7 @@ namespace HPCBackendServices {
             return "";
         }
         [WebMethod]
-        public string complete(){
+        public string status(){
             int current = 0;
             int size = 0;
             while (current < VirtualMachines.Count) {
@@ -83,7 +83,7 @@ namespace HPCBackendServices {
             return (size == VirtualMachines.Count)? "OK" : "NO";
         }
         [WebMethod]
-        public string run(){
+        public string mpi(){
             try {
                 if (VirtualMachines.Count > 0) {
                     Utils.commandExecBash(Utils.SCRIPTS + "run1");
