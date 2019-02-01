@@ -1,0 +1,24 @@
+#!/bin/sh
+nodes="/home/ubuntu/backend/address"
+counter=0
+file=$(cat $nodes)
+for line in $file
+do
+  case $line in '') ;; *)
+    acomment=${line%#*}
+    slave="$(echo "${acomment}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+    case $slave in '') echo "linha comentada="$line ;; *)
+      case $counter in '0')
+        /home/ubuntu/backend/ip_hostname $slave master
+
+      ;; *)
+        /home/ubuntu/backend/ip_hostname $slave slave$counter
+      esac
+      counter=$((counter+1))
+    esac
+  esac
+done;
+
+
+
+

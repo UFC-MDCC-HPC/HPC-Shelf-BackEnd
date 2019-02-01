@@ -1,9 +1,11 @@
 #!/bin/sh
-./ip_hostname 3.93.201.217 master
-./ip_hostname 3.88.220.29 h1
+M="3.85.105.217"
+H="3.81.103.72"
+/home/ubuntu/backend/ip_hostname $M master
+/home/ubuntu/backend/ip_hostname $H h1
 
-./known_hosts 3.93.201.217
-./known_hosts 3.88.220.29
+/home/ubuntu/backend/known_hosts $M
+/home/ubuntu/backend/known_hosts $H
 
 
 

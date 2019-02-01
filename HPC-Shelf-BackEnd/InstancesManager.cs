@@ -1,7 +1,9 @@
 using System;
+using Amazon;
 using Amazon.EC2;
 using Amazon.EC2.Model;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 
 namespace HPCBackendServices {
@@ -89,6 +91,28 @@ namespace HPCBackendServices {
             catch (Exception ex) {
                 Console.WriteLine("The key pair \"{0}\" already exists.", keyPairName);
             }
+        }
+        public static string Instance_status(RegionEndpoint regiao, string ami) {
+            AmazonEC2Client ec2Client = new AmazonEC2Client(regiao);
+            var response = ec2Client.DescribeInstanceStatus(new DescribeInstanceStatusRequest {
+                InstanceIds = new List<string> { ami }
+            });
+
+            List<InstanceStatus> instanceStatuses = response.InstanceStatuses;
+            if(instanceStatuses.Count>0)
+                return instanceStatuses.ElementAt(0).InstanceState.Name;
+            return "";
+        }
+        public static string Instance_statusCheck(RegionEndpoint regiao, string ami) {
+            AmazonEC2Client ec2Client = new AmazonEC2Client(regiao);
+            var response = ec2Client.DescribeInstanceStatus(new DescribeInstanceStatusRequest {
+                InstanceIds = new List<string> { ami }
+            });
+
+            List<InstanceStatus> instanceStatuses = response.InstanceStatuses;
+            if (instanceStatuses.Count > 0)
+                return instanceStatuses.ElementAt(0).SystemStatus.Status;
+            return "";
         }
     }
 }

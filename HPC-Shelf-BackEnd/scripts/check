@@ -1,0 +1,8 @@
+#!/bin/sh
+case $1 in '') echo "IP??" exit ;; *) 
+  echo "IP: $1"	
+  ssh -oStrictHostKeyChecking=no ubuntu@$1 uptime
+  rsh -i ~/credential.pem ubuntu@$1 "/bin/hostname"
+;; esac
+
+

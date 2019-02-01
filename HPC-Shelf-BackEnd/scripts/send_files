@@ -1,9 +1,9 @@
 #!/bin/sh
 case $1 in '') echo "IP???" exit ;; *) 
     echo "Starting files transfer IP: $1"
-    scp -i ~/credential.pem ./cluster_config.tar.gz ubuntu@$1:/home/ubuntu/
-    scp -i ~/credential.pem ./slaves ubuntu@$1:/home/ubuntu/
-    scp -i ~/credential.pem ./hosts ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem /home/ubuntu/backend/cluster_config.tar.gz ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem /home/ubuntu/backend/slaves ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem /home/ubuntu/backend/hosts ubuntu@$1:/home/ubuntu/
     
 	rsh -i ~/credential.pem ubuntu@$1 "tar -xzvf /home/ubuntu/cluster_config.tar.gz"
     rsh -i ~/credential.pem ubuntu@$1 "rm -rf /home/ubuntu/cluster_config.tar.gz"
