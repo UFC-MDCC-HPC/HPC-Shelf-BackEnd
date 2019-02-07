@@ -1,0 +1,2 @@
+-n 1 /opt/mono-4.2.2/bin/mono-service -l:Worker4801.lock bin/WorkerService.exe --port 4801 --debug --no-deamon
+-n 1 /opt/mono-4.2.2/bin/mono-service -l:Worker4802.lock bin/WorkerService.exe --port 4802 --debug --no-deamon

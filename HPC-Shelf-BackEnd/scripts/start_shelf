@@ -1,0 +1,8 @@
+#!/bin/sh
+case $1 in '') echo "IP???" exit ;; *) 
+  echo "Starting hpc_shelf for master: $1"
+  rsh -i ~/credential.pem ubuntu@$1 "/home/ubuntu/cluster_config/run_start_shelf"
+;; esac
+
+
+

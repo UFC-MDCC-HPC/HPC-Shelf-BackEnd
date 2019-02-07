@@ -132,12 +132,15 @@ namespace HPCBackendServices {
                 List<string> hosts = new List<string>();
                 List<string> slaves = new List<string>();
                 List<string> address = new List<string>();
-                int count = 0;
+                List<string> workers = new List<string>();
+                int count = 0; int ports = 4801;
 
                 slaves.Add("master");
                 hosts.Add("127.0.0.1 localhost");
                 hosts.Add(it.Current.PrivateIpAddress + " master");
                 address.Add(it.Current.PublicIpAddress);
+                workers.Add("-n 1 /opt/mono-4.2.2/bin/mono-service -l:Worker"+(ports)+".lock bin/WorkerService.exe --port "+(ports)+" --debug --no-deamon");
+                ports++;
 
                 while (it.MoveNext()) {
                     IVirtualMachine vm = it.Current;
@@ -145,10 +148,14 @@ namespace HPCBackendServices {
                     slaves.Add("slave" + (++count));
                     hosts.Add(vm.PrivateIpAddress + " slave"+count);
                     address.Add(vm.PublicIpAddress);
+
+                    workers.Add("-n 1 /opt/mono-4.2.2/bin/mono-service -l:Worker" + (ports) + ".lock bin/WorkerService.exe --port " + (ports) + " --debug --no-deamon");
+                    ports++;
                 }
                 Utils.fileWrite(Utils.SCRIPTS, "slaves", slaves.ToArray());
                 Utils.fileWrite(Utils.SCRIPTS, "hosts", hosts.ToArray());
                 Utils.fileWrite(Utils.SCRIPTS, "address", address.ToArray());
+                Utils.fileWrite(Utils.SCRIPTS, "workers", workers.ToArray());
             }
         }
     }
