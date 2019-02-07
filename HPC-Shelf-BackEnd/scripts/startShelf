@@ -1,0 +1,8 @@
+#!/bin/sh
+#M=$(head -n 1 address)
+case $1 in '') echo "IP???" exit ;; *) 
+  echo "Starting startShelf for master: $1"
+  rsh -i ~/credential.pem ubuntu@$1 "/home/ubuntu/cluster_config/run_startShelf"
+;; esac
+
+

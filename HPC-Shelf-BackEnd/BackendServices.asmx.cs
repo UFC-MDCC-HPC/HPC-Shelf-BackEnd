@@ -17,7 +17,9 @@ namespace HPCBackendServices {
         private AmazonEC2Client client;
 
         private static RegionEndpoint regiao = RegionEndpoint.USEast1; //RegionEndpoint.USEast1=Virginia // RegionEndpoint.SAEast1=Sao Paulo
-        
+
+        private static string ScriptRunException = "Script RunException!!!";
+
         public BackendServices() { client = new AmazonEC2Client(regiao); }
 
         [WebMethod]
@@ -91,11 +93,22 @@ namespace HPCBackendServices {
                     return VirtualMachines.ElementAt(0).PublicIpAddress;
                 }
             } catch (Exception e) {
-                Console.WriteLine("Script RunException!!!");
+                Console.WriteLine(ScriptRunException);
             }
-            if (VirtualMachines.Count > 0)
-                return VirtualMachines.ElementAt(0).PublicIpAddress;
-            return "";
+            return ScriptRunException;
+        }
+        [WebMethod]
+        public string startShelf() {
+            try {
+                if (VirtualMachines.Count > 0) {
+                    string master = VirtualMachines.ElementAt(0).PublicIpAddress;
+                    Utils.commandExecBash(Utils.SCRIPTS + "startShelf "+master+" &");
+                    return master;
+                }
+            } catch (Exception e) {
+                Console.WriteLine(ScriptRunException);
+            }
+            return ScriptRunException;
         }
 
         protected void DataRegistry(AmazonEC2Client client, string instanceId) {
