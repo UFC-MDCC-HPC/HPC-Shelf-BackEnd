@@ -86,29 +86,35 @@ namespace HPCBackendServices {
         }
         [WebMethod]
         public string mpi(){
-            try {
-                if (VirtualMachines.Count > 0) {
+            if (VirtualMachines.Count > 0) {
+                string master = VirtualMachines.ElementAt(0).PublicIpAddress;
+                try {
                     Utils.commandExecBash(Utils.SCRIPTS + "run1");
                     Utils.commandExecBash(Utils.SCRIPTS + "run2");
-                    return VirtualMachines.ElementAt(0).PublicIpAddress;
+                } catch (Exception e) {
+                    Console.WriteLine(ScriptRunException);
                 }
-            } catch (Exception e) {
-                Console.WriteLine(ScriptRunException);
+                return master;
             }
-            return ScriptRunException;
+            return "VirtualMachines List is empty!!";
         }
         [WebMethod]
         public string startShelf() {
-            try {
-                if (VirtualMachines.Count > 0) {
-                    string master = VirtualMachines.ElementAt(0).PublicIpAddress;
-                    Utils.commandExecBash(Utils.SCRIPTS + "startShelf "+master+" &");
-                    return master;
+            if (VirtualMachines.Count > 0) {
+                string master = VirtualMachines.ElementAt(0).PublicIpAddress;
+                try {
+                    //Thread thread = new Thread(() => xsp4_shelf_master_run(master));
+                    //thread.Start();
+                    xsp4_shelf_master_run(master);
+                } catch (Exception e) {
+                    Console.WriteLine(ScriptRunException);
                 }
-            } catch (Exception e) {
-                Console.WriteLine(ScriptRunException);
+                return master;
             }
-            return ScriptRunException;
+            return "VirtualMachines List is empty!!";
+        }
+        private static void xsp4_shelf_master_run(string master){
+            Utils.commandExecBash(Utils.SCRIPTS + "startShelf " + master + " &");
         }
 
         protected void DataRegistry(AmazonEC2Client client, string instanceId) {
