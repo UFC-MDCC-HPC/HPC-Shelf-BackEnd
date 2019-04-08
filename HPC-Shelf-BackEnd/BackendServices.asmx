@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" Class="HPCBackendServices.BackendServices" %>
+﻿<%@ WebService Language="C#" Class="br.ufc.mdcc.hpcshelf.backend.BackendServices" %>

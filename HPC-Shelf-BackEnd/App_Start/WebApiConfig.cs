@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace HPCBackendServices {
+namespace br.ufc.mdcc.hpcshelf.backend {
     public static class WebApiConfig {
         public static void Register(HttpConfiguration config) {
             // Web API configuration and services

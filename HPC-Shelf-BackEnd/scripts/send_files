@@ -1,12 +1,13 @@
 #!/bin/sh
 case $1 in '') echo "IP???" exit ;; *) 
     echo "Starting files transfer IP: $1"
-    scp -i ~/credential.pem /home/ubuntu/backend/cluster_config.tar.gz ubuntu@$1:/home/ubuntu/
-    scp -i ~/credential.pem /home/ubuntu/backend/slaves ubuntu@$1:/home/ubuntu/
-    scp -i ~/credential.pem /home/ubuntu/backend/hosts ubuntu@$1:/home/ubuntu/
-    scp -i ~/credential.pem /home/ubuntu/backend/workers ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem $HOME/backend/cluster_config.tar.gz ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem $HOME/backend/peers ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem $HOME/backend/hosts ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem $HOME/backend/workers ubuntu@$1:/home/ubuntu/
+    scp -i ~/credential.pem $HOME/backend/workers_host_file ubuntu@$1:/home/ubuntu/
     
-	rsh -i ~/credential.pem ubuntu@$1 "tar -xzvf /home/ubuntu/cluster_config.tar.gz"
+    rsh -i ~/credential.pem ubuntu@$1 "tar -xzvf /home/ubuntu/cluster_config.tar.gz"
     rsh -i ~/credential.pem ubuntu@$1 "rm -rf /home/ubuntu/cluster_config.tar.gz"
 ;; esac
 

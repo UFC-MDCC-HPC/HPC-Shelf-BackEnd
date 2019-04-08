@@ -1,6 +1,14 @@
 ﻿using System;
-namespace HPCBackendServices {
-    public class VirtualMachine : IVirtualMachine {
+namespace br.ufc.mdcc.hpcshelf.backend
+{
+	public interface IVirtualMachine
+	{
+		string InstanceId { get; set; }
+		string PrivateIpAddress { get; set; }
+		string PublicIpAddress { get; set; }
+	}
+
+	public class VirtualMachine : IVirtualMachine {
         private string instanceId;
         public string InstanceId { get { return instanceId; } set { instanceId = value; } }
 

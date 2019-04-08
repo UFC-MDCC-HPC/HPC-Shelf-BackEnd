@@ -6,15 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-namespace HPCBackendServices {
-    public class InstancesManager {
-        public static string LaunchInstance(string amiID, string keyPairName, string secGroupName, AmazonEC2Client client) {
+namespace br.ufc.mdcc.hpcshelf.backend
+{
+    public class InstancesManager 
+    {
+        public static string LaunchInstance(string instanceType, string amiID, string keyPairName, string secGroupName, AmazonEC2Client client) {
             SecurityGroup mySG = GetSecurityGroup(secGroupName, client);
             List<string> groups = new List<string>() { mySG.GroupId };
 
-            var launchRequest = new RunInstancesRequest() {
+            var launchRequest = new RunInstancesRequest()
+            {
                 ImageId = amiID,
-                InstanceType = InstanceType.T1Micro,
+                InstanceType = InstanceType.FindValue(instanceType),
                 MinCount = 1,
                 MaxCount = 1,
                 KeyName = keyPairName,

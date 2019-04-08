@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 
-namespace HPCBackendServices {
+namespace br.ufc.mdcc.hpcshelf.backend
+{
     public class Utils {
         public static string HOME = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/";
         public static string CURRENT_FOLDER = Environment.CurrentDirectory + "/";

@@ -1,7 +1,7 @@
 #!/bin/sh
 M="3.85.105.217"
 H="3.81.103.72"
-/home/ubuntu/backend/ip_hostname $M master
+/home/ubuntu/backend/ip_hostname $M root
 /home/ubuntu/backend/ip_hostname $H h1
 
 /home/ubuntu/backend/known_hosts $M

@@ -1,18 +1,18 @@
 #!/bin/sh
-nodes="/home/ubuntu/backend/address"
-counter=0
+nodes="$HOME/backend/address"
+counter=-1
 file=$(cat $nodes)
 for line in $file
 do
   case $line in '') ;; *)
     acomment=${line%#*}
-    slave="$(echo "${acomment}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-    case $slave in '') echo "linha comentada="$line ;; *)
-      case $counter in '0')
-        /home/ubuntu/backend/ip_hostname $slave master
+    peer="$(echo "${acomment}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+    case $peer in '') echo "linha comentada="$line ;; *)
+      case $counter in '-1')
+        $HOME/backend/ip_hostname $peer root
 
       ;; *)
-        /home/ubuntu/backend/ip_hostname $slave slave$counter
+        $HOME/backend/ip_hostname $peer peer$counter
       esac
       counter=$((counter+1))
     esac

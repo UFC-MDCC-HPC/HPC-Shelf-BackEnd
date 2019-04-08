@@ -1,8 +1,8 @@
 #!/bin/sh
 #M=$(head -n 1 address)
 case $1 in '') echo "IP???" exit ;; *) 
-  echo "Starting startShelf for master: $1"
-  rsh -i ~/credential.pem ubuntu@$1 "/home/ubuntu/cluster_config/run_startShelf"
+  echo "Starting startShelf on root: global=$1 local=$2"
+  nohup rsh -i ~/credential.pem ubuntu@$1 "bash /home/ubuntu/cluster_config/run_service $1 $2" &
+  nohup rsh -i ~/credential.pem ubuntu@$1 "bash /home/ubuntu/cluster_config/run_workers $1 $2" &
+  echo "Started startShelf on root !"
 ;; esac
-
-

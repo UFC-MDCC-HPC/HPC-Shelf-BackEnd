@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="HPCBackendServices.Global" %>
+﻿<%@ Application Inherits="br.ufc.mdcc.hpcshelf.backend.Global" %>
